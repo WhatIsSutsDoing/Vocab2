@@ -1,13 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig(({ command, mode }) => {
-  // When building in CI for GitHub Pages we'll set GITHUB_PAGES=true.
-  // This sets the base so asset URLs become /vocab-learner/...
+export default defineConfig(() => {
   const isGitHubPages = !!process.env.GITHUB_PAGES;
+  const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'Vocab2';
 
   return {
-    base: isGitHubPages ? '/vocab-learner/' : '/',
+    base: isGitHubPages ? `/${repoName}/` : '/',
     plugins: [react()],
   }
 })
